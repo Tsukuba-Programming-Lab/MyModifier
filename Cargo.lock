@@ -7,6 +7,10 @@ name = "mymodifer"
 version = "0.1.0"
 
 [[package]]
+name = "mymodifier_core"
+version = "0.1.0"
+
+[[package]]
 name = "mymodifier_macros"
 version = "0.1.0"
 dependencies = [

@@ -1,0 +1,6 @@
+[package]
+name = "mymodifier_core"
+edition = "2024"
+version.workspace = true
+
+[dependencies]
