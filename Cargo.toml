@@ -9,8 +9,12 @@ version.workspace = true
 [workspace]
 resovler = "2"
 members = [
+    # crates
     "crates/core",
     "crates/macros",
+
+    # examples
+    "examples/simple",
 ]
 exclude = []
 
