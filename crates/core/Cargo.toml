@@ -6,3 +6,4 @@ version.workspace = true
 [dependencies]
 anyhow = { workspace = true }
 thiserror = { workspace = true }
+mymodifier_macros = { path = "../macros" }
