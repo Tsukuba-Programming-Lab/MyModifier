@@ -1,5 +1,25 @@
 # My Modifier
 
+```rust
+#[modifier]
+trait Dev {}
+
+#[modifier_callee]
+fn for_developper() {
+    // ...
+}
+
+fn main() {
+    // Ok
+    dev! {{
+        for_developper();
+    }}
+
+    // Compile error
+    for_developper();
+}
+```
+
 ## Examples
 
 - [simple](examples/simple)
