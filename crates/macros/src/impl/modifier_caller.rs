@@ -7,10 +7,7 @@ use syn::{Expr, ItemFn, Stmt};
 pub fn proc_macro_impl(args: TokenStream, ast: ItemFn) -> TokenStream {
     let target_trait = args;
 
-    let fn_visibility = ast.vis;
-    let fn_ident = ast.sig.ident;
-    let fn_ret_type = ast.sig.output;
-    let fn_stmts = &ast
+    let stmts = &ast
         .block
         .stmts
         .iter()
@@ -18,15 +15,12 @@ pub fn proc_macro_impl(args: TokenStream, ast: ItemFn) -> TokenStream {
         .collect::<Vec<_>>();
 
     quote! {
-        // マクロ適用関数
-        #fn_visibility fn #fn_ident () #fn_ret_type {
-            // 前準備
-            #[allow(non_local_definitions)]
-            impl #target_trait for Ctx {}
+        // 前準備
+        #[allow(non_local_definitions)]
+        impl #target_trait for Ctx {}
 
-            // 関数本体
-            #(#fn_stmts);*
-        }
+        // 関数本体
+        #(#stmts);*
     }
 }
 
@@ -36,6 +30,11 @@ fn append_ctx_if_calling(stmt: &Stmt) -> TokenStream {
             let func = call.func.to_token_stream();
             let args = call.args.to_token_stream();
             quote! { #func (Ctx, #args) }
+        } else if let Expr::MethodCall(call) = expr {
+            let receiver = call.receiver.to_token_stream();
+            let method = call.method.to_token_stream();
+            let args = call.args.to_token_stream();
+            quote! { #receiver . #method (Ctx, #args) }
         } else {
             stmt.to_token_stream()
         }

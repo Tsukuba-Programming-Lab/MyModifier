@@ -15,14 +15,22 @@ fn fn_a() {}
 #[modifier_callee(B + C)]
 fn fn_b_c() {}
 
+struct Object {}
+
+impl Object {
+    #[modifier_callee(A)]
+    fn method(&mut self) {}
+}
+
+
 #[test]
 fn check_compile() {
     struct Ctx;
-
     a! {
-        fn_a();
         b! {
             c! {
+                Object{}.method();
+                fn_a();
                 fn_b_c();
             }
         }
