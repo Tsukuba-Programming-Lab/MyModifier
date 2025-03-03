@@ -9,14 +9,20 @@ pub fn proc_macro_impl(_args: TokenStream, ast: ItemTrait) -> TokenStream {
     let macro_ident = as_macro_ident(trait_name);
 
     quote! {
+        // トレイト本体
         #ast
 
+        // 文脈マクロ
         macro_rules! #macro_ident {
             ($($body:tt)*) => {{
-                fn __mymodifier_callee() {
+                // 文脈付き呼び出しへの変換
+                #[modifier_caller(#trait_name)]
+                fn __mymodifier_caller() {
                     $($body)*
                 }
-                __mymodifier_callee();
+
+                // 呼び出し
+                __mymodifier_caller();
             }};
         }
     }
