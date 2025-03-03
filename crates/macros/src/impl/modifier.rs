@@ -13,6 +13,7 @@ pub fn proc_macro_impl(_args: TokenStream, ast: ItemTrait) -> TokenStream {
         #ast
 
         // 文脈マクロ
+        #[macro_export]
         macro_rules! #macro_ident {
             ($($body:tt)*) => {{
                 // 文脈付き呼び出しへの変換
