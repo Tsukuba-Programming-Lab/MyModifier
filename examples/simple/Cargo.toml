@@ -1,0 +1,8 @@
+[package]
+name = "example_simple"
+edition = "2024"
+version.workspace = true
+
+[dependencies]
+anyhow = { workspace = true }
+thiserror = { workspace = true }

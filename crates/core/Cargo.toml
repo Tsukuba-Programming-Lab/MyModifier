@@ -1,0 +1,9 @@
+[package]
+name = "mymodifier_core"
+edition = "2024"
+version.workspace = true
+
+[dependencies]
+anyhow = { workspace = true }
+thiserror = { workspace = true }
+mymodifier_macros = { path = "../macros" }
