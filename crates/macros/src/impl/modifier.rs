@@ -15,6 +15,17 @@ pub fn proc_macro_impl(_args: TokenStream, ast: ItemTrait) -> TokenStream {
         // 文脈マクロ
         #[macro_export]
         macro_rules! #macro_ident {
+            ({ $($body:tt)* }) => {
+                // 文脈を用意
+                struct Ctx;
+
+                // 文脈付き呼び出しへの変換 (関数定義ではなくブロックに変換される)
+                #[modifier_caller(#trait_name)]
+                fn __mymodifier_caller() {
+                    $($body)*
+                }
+            };
+
             ($($body:tt)*) => {{
                 // 文脈付き呼び出しへの変換 (関数定義ではなくブロックに変換される)
                 #[modifier_caller(#trait_name)]

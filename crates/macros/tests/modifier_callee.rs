@@ -25,8 +25,7 @@ impl Object {
 
 #[test]
 fn check_compile() {
-    struct Ctx;
-    a! {
+    a! {{
         b! {
             c! {
                 Object{}.method();
@@ -34,5 +33,5 @@ fn check_compile() {
                 fn_b_c();
             }
         }
-    }
+    }}
 }
