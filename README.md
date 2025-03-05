@@ -4,7 +4,7 @@
 #[modifier]
 trait Dev {}
 
-#[modifier_callee]
+#[modifier_callee(Dev)]
 fn for_developper() {
     // ...
 }
