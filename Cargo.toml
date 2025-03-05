@@ -1,6 +1,26 @@
 [package]
 name = "mymodifer"
-version = "0.1.0"
 edition = "2024"
+version.workspace = true
 
 [dependencies]
+# TODO
+
+[workspace]
+resovler = "2"
+members = [
+    # crates
+    "crates/core",
+    "crates/macros",
+
+    # examples
+    "examples/simple",
+]
+exclude = []
+
+[workspace.package]
+version = "0.1.0"
+
+[workspace.dependencies]
+anyhow = "1.0.96"
+thiserror = "2.0.11"
